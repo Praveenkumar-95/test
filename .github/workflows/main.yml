@@ -20,6 +20,7 @@ jobs:
         if: github.event.schedule != '30 5 * * 1,4'
         run: |
           pwd
+          cd ../
           ls
           echo "This step will be skipped on Monday and Thursday"
           python run.py
