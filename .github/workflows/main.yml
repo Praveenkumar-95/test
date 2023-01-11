@@ -21,11 +21,11 @@ jobs:
         run: |
           pwd
           echo "This step will be skipped on Monday and Thursday"
-          python run.py
+          python /home/runner/work/test/run.py
         continue-on-error: true
 
       - name: Running .py Every time
         run: |
           echo "This step will always run"
-          python run.py
+          python /home/runner/work/test/run.py
         continue-on-error: true
