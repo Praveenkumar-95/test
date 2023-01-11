@@ -1,4 +1,4 @@
-name: testing_
+name: testing
 
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -11,38 +11,62 @@ jobs:
   test_schedule:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10.6"
+#      - name: Set up Python
+#        uses: actions/setup-python@v4
+#        with:
+#          python-version: "3.10.6"
 
       - name: Running .py with schedule
-        if: github.event.schedule != '0 0 * * 1,4'
-        run: |
-          echo "**** 1 ****"
-          pwd
-          ls
-          echo "**** 2 ****"
-          cd ../
-          ls
-          echo "**** 3 ****"
-          cd test/test
-          ls
-          echo "This step will be skipped on Monday and Thursday"
-          python run.py
-        continue-on-error: true
+        if: always()
+        run: echo "This step will be skipped on Monday and Thursday"
 
-      - name: Running .py Every time
-        run: |
-          echo "**** 1 ****"
-          pwd
-          ls
-          echo "**** 2 ****"
-          cd ../
-          ls
-          echo "**** 3 ****"
-          cd test/test
-          ls
-          echo "This step will always run"
-          python run.py
-        continue-on-error: true
+
+
+#name: testing_
+#
+#on:
+#  # Triggers the workflow on push or pull request events but only for the "main" branch
+#  push:
+#    branches: ["main"]
+##  schedule:
+##    - cron: "0 0 * * *"
+#
+#jobs:
+#  test_schedule:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Set up Python
+#        uses: actions/setup-python@v4
+#        with:
+#          python-version: "3.10.6"
+#
+#      - name: Running .py with schedule
+#        if: github.event.schedule != '0 0 * * 1,4'
+#        run: |
+#          echo "**** 1 ****"
+#          pwd
+#          ls
+#          echo "**** 2 ****"
+#          cd ../
+#          ls
+#          echo "**** 3 ****"
+#          cd test/test
+#          ls
+#          echo "This step will be skipped on Monday and Thursday"
+#          python run.py
+#        continue-on-error: true
+#
+#      - name: Running .py Every time
+#        run: |
+#          echo "**** 1 ****"
+#          pwd
+#          ls
+#          echo "**** 2 ****"
+#          cd ../
+#          ls
+#          echo "**** 3 ****"
+#          cd test/test
+#          ls
+#          echo "This step will always run"
+#          python run.py
+#        continue-on-error: true
