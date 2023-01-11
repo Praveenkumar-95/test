@@ -17,15 +17,16 @@ jobs:
           python-version: "3.10.6"
 
       - name: Running .py with schedule
-        if: github.event.schedule != '30 5 * * 1,4'
+        if: github.event.schedule != '0 0 * * 1,4'
         run: |
           echo "**** 1 ****"
           pwd
-          echo "**** 2 ****"
           ls
-          echo  "**** 3 ****"
+          echo "**** 2 ****"
           cd ../
-          echo  "**** 4 ****"
+          ls
+          echo "**** 3 ****"
+          cd test/test
           ls
           echo "This step will be skipped on Monday and Thursday"
           python run.py
@@ -33,6 +34,15 @@ jobs:
 
       - name: Running .py Every time
         run: |
+          echo "**** 1 ****"
+          pwd
+          ls
+          echo "**** 2 ****"
+          cd ../
+          ls
+          echo "**** 3 ****"
+          cd test/test
+          ls
           echo "This step will always run"
           python run.py
         continue-on-error: true
