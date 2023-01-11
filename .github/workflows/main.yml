@@ -16,13 +16,16 @@ jobs:
         with:
           python-version: "3.10.6"
 
-      - name: Running .py without schedule
+      - name: Running .py with schedule
         if: github.event.schedule != '30 5 * * 1,4'
         run: |
+          pwd
           echo "This step will be skipped on Monday and Thursday"
           python run.py
+        continue-on-error: true
 
       - name: Running .py Every time
         run: |
           echo "This step will always run"
           python run.py
+        continue-on-error: true
