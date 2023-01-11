@@ -4,7 +4,7 @@ on:
   push:
     branches: ["main"]
 #  schedule:
-#    - cron: "55 9 * * *"
+    - cron: "0 10 * * *"
 
 jobs:
   test_schedule:
@@ -17,7 +17,7 @@ jobs:
 
       - name: Running .py with schedule
         if: always()
-        run: echo "This step will be skipped on Monday and Thursday"
+        run: echo "Run without schedule"
 
 
 
