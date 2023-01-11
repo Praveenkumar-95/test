@@ -23,3 +23,4 @@ jobs:
 
       - name: Running .py Every time
         run: echo "This step will always run"
+              python run.py
