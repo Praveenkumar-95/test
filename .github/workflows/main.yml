@@ -22,6 +22,8 @@ jobs:
           pwd
           cd ../
           ls
+          cd ../../
+          ls
           echo "This step will be skipped on Monday and Thursday"
           python run.py
         continue-on-error: true
