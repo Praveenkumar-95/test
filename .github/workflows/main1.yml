@@ -1,10 +1,9 @@
 name: testing_1
 
 on:
-  push:
-    branches: ["main"]
   schedule:
     - cron: '55 9 * * 1,4'
+  workflow_dispatch:
 
 jobs:
   test_schedule:
