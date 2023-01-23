@@ -1,72 +1,35 @@
-name: testing
+name: Deploy to Azure Storage
 
 on:
   push:
-    branches: ["main"]
-  schedule:
-    - cron: "10 10 * * *"
-  workflow_dispatch:
+    branches:
+      - master
 
 jobs:
-  test_schedule:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10.6"
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Running .py with schedule
-        if: always()
-        run: echo "Run without schedule"
+    - name: Set up Azure CLI
+      uses: azure/setup-azure-cli@v1
+
+    - name: Login to Azure
+      run: az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+
+    - name: Deploy to Azure Storage
+      uses: azure/storage-blob-deploy@v2
+      with:
+        container_name: newcontainer
+        source: folder_to_upload
+        connection_string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
 
 
-
-#name: testing_
-#
-#on:
-#  # Triggers the workflow on push or pull request events but only for the "main" branch
-#  push:
-#    branches: ["main"]
-##  schedule:
-##    - cron: "0 0 * * *"
-#
-#jobs:
-#  test_schedule:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Set up Python
-#        uses: actions/setup-python@v4
-#        with:
-#          python-version: "3.10.6"
-#
-#      - name: Running .py with schedule
-#        if: github.event.schedule != '0 0 * * 1,4'
-#        run: |
-#          echo "**** 1 ****"
-#          pwd
-#          ls
-#          echo "**** 2 ****"
-#          cd ../
-#          ls
-#          echo "**** 3 ****"
-#          cd test/test
-#          ls
-#          echo "This step will be skipped on Monday and Thursday"
-#          python run.py
-#        continue-on-error: true
-#
-#      - name: Running .py Every time
-#        run: |
-#          echo "**** 1 ****"
-#          pwd
-#          ls
-#          echo "**** 2 ****"
-#          cd ../
-#          ls
-#          echo "**** 3 ****"
-#          cd test/test
-#          ls
-#          echo "This step will always run"
-#          python run.py
-#        continue-on-error: true
+#    - name: Deploy to Azure Storage
+#      uses: azure/storage-blob-deploy@v2
+#      with:
+#        source_path: path/to/folder
+#        destination_path: mycontainer
+#        connection_string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
