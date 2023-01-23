@@ -14,24 +14,11 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Set up Azure CLI
-      uses: azure/CLI@v1
+    - uses: LanceMcCarthy/Action-AzureBlobUpload@v2
+      name: Azure Blob Upload with Destination folder defined
       with:
-        azcliversion: latest
-
-    - name: Login to Azure
-      run: az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-
-    - name: Deploy to Azure Storage
-      uses: azure/storage-blob-deploy@v2
-      with:
-        container_name: newcontainer
-        source: folder_to_upload
         connection_string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
-
-
-#    - name: Deploy to Azure Storage
-#      uses: azure/storage-blob-deploy@v2
-#      with:
-#        source_path: path/to/folder
-#        destination_path: mycontainer
-#        connection_string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+        container_name: newcontainer
+        source_folder: folder_to_upload
+        destination_folder: mmgresults
+        clean_destination_folder: true
