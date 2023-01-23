@@ -13,9 +13,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Azure CLI
-    - uses: LanceMcCarthy/Action-AzureBlobUpload@v2
-      name: Azure Blob Upload with Destination folder defined
+    - name: Azure Blob Upload with Destination folder defined
+      uses: LanceMcCarthy/Action-AzureBlobUpload@v2
       with:
         connection_string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
         container_name: newcontainer
