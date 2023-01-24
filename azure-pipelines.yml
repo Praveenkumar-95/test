@@ -30,7 +30,7 @@ steps:
 #     script: 'poetry run python run_behave.py'
 - task: AzureFileCopy@5
   inputs:
-    SourcePath: 'folders_to_upload'
+    SourcePath: 'folder_to_upload'
     azureSubscription: 'Free Trial (aead0d7d-9451-46d1-ae10-6e7379a57b57)'
     Destination: 'AzureBlob'
     storage: 'mmgresults'
