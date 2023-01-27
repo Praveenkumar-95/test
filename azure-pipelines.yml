@@ -13,27 +13,27 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-# - task: CmdLine@2
-#   displayName: Install Python & dependencies
-#   inputs:
-#     script: |
-#       apt-get update && apt-get install -y poppler-utils
-#       curl -sSL https://bootstrap.pypa.io/get-pip.py -o get-pip.py | python3.10
-#       python3.10 -m pip --version
-#       python3.10 -m pip install --upgrade pip
-#       python3.10 -m pip install poetry
-#       python3.10 -m poetry install
-#       pwd
-# - task: CmdLine@2
-#   displayName: Run Python script
-#   inputs:
-#     script: 'poetry run python run_behave.py'
-- task: AzureFileCopy@5
+- task: CmdLine@2
+  displayName: Install Python & dependencies
   inputs:
-    SourcePath: 'folder_to_upload'
-    azureSubscription: 'Free Trial (aead0d7d-9451-46d1-ae10-6e7379a57b57)'
-    Destination: 'AzureBlob'
-    storage: 'mmgresults'
-    ContainerName: 'newcontainer'
+    script: |
+      apt-get update && apt-get install -y poppler-utils
+      curl -sSL https://bootstrap.pypa.io/get-pip.py -o get-pip.py | python3.10
+      python3.10 -m pip --version
+      python3.10 -m pip install --upgrade pip
+      python3.10 -m pip install poetry
+      python3.10 -m poetry install
+      pwd
+- task: CmdLine@2
+  displayName: Run Python script
+  inputs:
+    script: 'poetry run python run_behave.py'
+# - task: AzureFileCopy@5
+#   inputs:
+#     SourcePath: 'folder_to_upload'
+#     azureSubscription: 'Free Trial (aead0d7d-9451-46d1-ae10-6e7379a57b57)'
+#     Destination: 'AzureBlob'
+#     storage: 'mmgresults'
+#     ContainerName: 'newcontainer'
 
 
